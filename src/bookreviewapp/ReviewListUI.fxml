@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookreviewapp.ReviewListUICntl">
+    <children>
+        <ScrollPane layoutX="65.0" layoutY="75.0" prefHeight="232.0" prefWidth="503.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="203.0">
+                    <children>
+                        <TableView id="ReviewTable" fx:id="reviewTable" prefHeight="232.0" prefWidth="496.0" AnchorPane.bottomAnchor="-32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-296.0" AnchorPane.topAnchor="0.0">
+                            <columns>
+                                <TableColumn id="TitleColumn" fx:id="TitleColumn" prefWidth="100.0" text="Title" />
+                                <TableColumn id="AuthorColumn" fx:id="AuthorColumn" prefWidth="100.0" text="Author" />
+                                <TableColumn id="ISBNColumn" fx:id="ISBNColumn" prefWidth="113.0" text="ISBN" />
+                                <TableColumn id="RatingColumn" fx:id="RatingColumn" prefWidth="93.0" text="Rating" />
+                                <TableColumn id="TextColumn" fx:id="TextColumn" prefWidth="93.0" text="Text" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <Button fx:id="AddReviewButton" layoutX="65.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleAddReviewButtonAction" text="Add Review" />
+        <Button fx:id="CancelButton" layoutX="476.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleReviewCancelButtonAction" text="Cancel" />
+        <Text fx:id="actiontarget" layoutX="241.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        
+    </children>
+</AnchorPane>
