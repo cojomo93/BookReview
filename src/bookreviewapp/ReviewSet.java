@@ -7,12 +7,12 @@ import java.util.Set;
 
 public class ReviewSet implements Serializable {
 
-    private final ArrayList<Review> theListOfReviews;
+    private final ArrayList<Review> theListOfReviewsSet;
 
     public ReviewSet() {
-        theListOfReviews = getReviews();
-        Set<Review> setReview = new HashSet<>(theListOfReviews);
-        setReview.addAll(theListOfReviews);
+        theListOfReviewsSet = getReviews();
+        Set<Review> setReview = new HashSet<>(theListOfReviewsSet);
+        setReview.addAll(theListOfReviewsSet);
     }
 
     private ArrayList<Review> getReviews() {
