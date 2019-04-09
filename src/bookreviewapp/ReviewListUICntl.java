@@ -1,37 +1,24 @@
 package bookreviewapp;
 
-import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.Font;
 
 public class ReviewListUICntl implements Initializable {
 
     @FXML
     private Text actiontarget;
-    @FXML
-    private ChoiceBox<String> searchChoice;
     @FXML
     private TableView<Review> reviewTable;
     @FXML
@@ -46,6 +33,8 @@ public class ReviewListUICntl implements Initializable {
     private TableColumn<Review, String> TextColumn;
     @FXML
     private ObservableList<Review> listOfReviews;
+    @FXML
+    private TextField textField;
 
     public ReviewListUICntl() {
         this.TextColumn = new TableColumn<>("Text");
@@ -54,73 +43,59 @@ public class ReviewListUICntl implements Initializable {
         this.AuthorColumn = new TableColumn<>("Author");
         this.TitleColumn = new TableColumn<>("Title");
         this.reviewTable = new TableView<>();
-        this.searchChoice = new ChoiceBox();
+        this.textField = new TextField();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        reviewTable.setEditable(true);
-
         // Get the data for the table
         listOfReviews = PersistentDataCntl.getPersistentDataCntl().getPeristentDataCollection().getReviewList().getReviewData();
 
         // Set up the table columns and link them to the table data fields
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<>("reviewTitle"));
-        AuthorColumn.setCellValueFactory(new PropertyValueFactory<>("reviewAuthor"));
-        ISBNColumn.setCellValueFactory(new PropertyValueFactory<>("reviewISBN"));
-        RatingColumn.setCellValueFactory(new PropertyValueFactory<>("reviewRating"));
-        TextColumn.setCellValueFactory(new PropertyValueFactory<>("reviewText"));
+        TitleColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewTitle"));
+        AuthorColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewAuthor"));
+        ISBNColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewISBN"));
+        RatingColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewRating"));
+        TextColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
 
-        // Add the data to the table
-        //reviewTable.setItems(listOfReviews);
+
+        reviewTable.setItems(listOfReviews);
+
         FilteredList<Review> flReview = new FilteredList(listOfReviews, p -> true);//Pass the data to a filtered list
-        reviewTable.setItems(flReview);//Set the table's items using the filtered list
-        reviewTable.getColumns().addAll(TitleColumn, AuthorColumn, ISBNColumn, RatingColumn, TextColumn);
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            flReview.setPredicate(review -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
 
-        searchChoice.getItems().addAll("Title", "Author", "ISBN", "Rating");
-        searchChoice.setValue("Title");
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
 
-        TextField textField = new TextField();
-        textField.setPromptText("Search here!");
-        textField.setOnKeyReleased(keyEvent
-                -> {
-            switch (searchChoice.getValue())//Switch on choiceBox value
-            {
-                case "Title":
-                    flReview.setPredicate(p -> p.getReviewTitle().toLowerCase().contains(textField.getText().toLowerCase().trim()));//filter table by first name
-                    break;
-                case "Author":
-                    flReview.setPredicate(p -> p.getReviewAuthor().toLowerCase().contains(textField.getText().toLowerCase().trim()));//filter table by first name
-                    break;
-                case "ISBN":
-                    flReview.setPredicate(p -> p.getReviewISBN().toLowerCase().contains(textField.getText().toLowerCase().trim()));//filter table by first name
-                    break;
-                case "Rating":
-                    flReview.setPredicate(p -> p.getReviewRating().toLowerCase().contains(textField.getText().toLowerCase().trim()));//filter table by first name
-                    break;
+                if (review.getReviewTitle().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches first name.
+                } else if (review.getReviewAuthor().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                } else if (review.getReviewISBN().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                } else if (review.getReviewRating().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
 
-            }
+            SortedList<Review> sortedData = new SortedList<>(flReview);
+            sortedData.comparatorProperty().bind(reviewTable.comparatorProperty());
+            reviewTable.setItems(sortedData);
+
+           
         });
 
-        searchChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal)
-                -> {//reset table and textfield when new choice is selected
-            if (newVal != null) {
-                textField.setText("");
-                flReview.setPredicate(null);//This is same as saying flPerson.setPredicate(p->true);
-            }
-        });
-        HBox hBox = new HBox(searchChoice, textField);//Add choiceBox and textField to hBox
-        hBox.setAlignment(Pos.CENTER);//Center HBox
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll( hBox);
-
-        //     ((Group) scene.getRoot()).getChildren().addAll(vbox);
     }
 
     @FXML
     protected void handleAddReviewButtonAction(ActionEvent event) {
+        System.out.println("I clicked Add Review");
         Stage stage = (Stage) actiontarget.getScene().getWindow();
         stage.hide();
         ReviewListCntl.getReviewListCntl(stage).getAddReviewCntl(stage);
@@ -134,13 +109,4 @@ public class ReviewListUICntl implements Initializable {
         NavigationCntl.getNavigationCntl(stage).setUpNavigationScene();
     }
 
-    @FXML
-    protected void handleSearchButtonAction(ActionEvent event) {
-        Stage stage = (Stage) actiontarget.getScene().getWindow();
-        stage.hide();
-
-        SearchCntl.getSearchCntl(stage);
-        //ReviewListCntl.getReviewListCntl(stage).getAddReviewCntl(stage);
-
-    }
 }
