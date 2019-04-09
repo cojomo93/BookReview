@@ -11,11 +11,13 @@ public class Review implements Serializable {
     public final String reviewText;
 
     public Review(String reviewTitle, String reviewAuthor, String reviewISBN, String reviewRating, String reviewText) {
+
         this.reviewTitle = reviewTitle;
         this.reviewAuthor = reviewAuthor;
         this.reviewISBN = reviewISBN;
         this.reviewRating = reviewRating;
         this.reviewText = reviewText;
+
     }
 
     public String getReviewTitle() {
