@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookreviewapp.ReviewListUICntl">
+<AnchorPane minWidth="315.0" prefHeight="353.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookreviewapp.ReviewListUICntl">
     <children>
-        <ScrollPane layoutX="65.0" layoutY="75.0" prefHeight="232.0" prefWidth="503.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="203.0">
-                    <children>
-                        <TableView id="ReviewTable" fx:id="reviewTable" prefHeight="232.0" prefWidth="496.0" AnchorPane.bottomAnchor="-32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-296.0" AnchorPane.topAnchor="0.0">
-                            <columns>
-                                <TableColumn id="TitleColumn" fx:id="TitleColumn" prefWidth="100.0" text="Title" />
-                                <TableColumn id="AuthorColumn" fx:id="AuthorColumn" prefWidth="100.0" text="Author" />
-                                <TableColumn id="ISBNColumn" fx:id="ISBNColumn" prefWidth="113.0" text="ISBN" />
-                                <TableColumn id="RatingColumn" fx:id="RatingColumn" prefWidth="93.0" text="Rating" />
-                                <TableColumn id="TextColumn" fx:id="TextColumn" prefWidth="93.0" text="Text" />
-                            </columns>
-                        </TableView>
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-        <Button fx:id="AddReviewButton" layoutX="65.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleAddReviewButtonAction" text="Add Review" />
-        <Button fx:id="CancelButton" layoutX="476.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleReviewCancelButtonAction" text="Cancel" />
-        <Text fx:id="actiontarget" layoutX="241.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Button fx:id="SearchButton" layoutX="384.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleSearchButtonAction" prefHeight="27.0" prefWidth="61.0" text="Search" />
-      <TextField layoutX="217.0" layoutY="25.0" />
-      <ChoiceBox fx:id="searchChoice" layoutX="65.0" layoutY="25.0" prefWidth="150.0" />
-        
+        <TableView fx:id="reviewTable" prefHeight="240.0" prefWidth="386.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+            <columns>
+                <TableColumn fx:id="TitleColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Title" />
+                <TableColumn fx:id="AuthorColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Author" />
+                <TableColumn fx:id="ISBNColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="ISBN" />
+                <TableColumn fx:id="RatingColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Rating" />
+                <TableColumn fx:id="TextColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Text" />
+
+                  </columns>
+        </TableView>
+        <HBox id="HBox" alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <Label text="Filter Table:" />
+                <TextField fx:id="textField" prefHeight="26.0" prefWidth="232.0" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+        <HBox layoutX="10.0" layoutY="300.0" prefHeight="27.0" prefWidth="91.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="10.0">
+            <children>
+                <Button fx:id="AddReviewButton" mnemonicParsing="false" onAction="#handleAddReviewButtonAction" text="Add Review">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            </children>
+        </HBox>
+        <HBox layoutX="305.0" layoutY="297.0" prefHeight="27.0" prefWidth="73.0" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="28.0">
+            <children>
+                <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#handleReviewCancelButtonAction" prefHeight="4.0" prefWidth="73.0" text="Cancel" />
+                <Text fx:id="actiontarget" layoutX="241.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            </children>
+        </HBox> 
+      
     </children>
 </AnchorPane>
