@@ -3,6 +3,7 @@ package bookreviewapp;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap; 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,5 +36,7 @@ public class ReviewList implements Serializable {
         return testReviews;
 
     }
+    
+    
 
 }
