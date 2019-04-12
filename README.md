@@ -16,6 +16,7 @@ You can search by:
     -Author
     -ISBN
     -Star rating
+You can also filter the table either in alphabetical order or by reverse alphabetical order, simply by clicking on the headers of each column.
 Once you start typing in the search bar, the table refreshes to show the users which reviews come closest to what you search for.
 
 *There is a bug where you can only add one review before restarting the application*
