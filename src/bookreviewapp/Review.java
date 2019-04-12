@@ -17,7 +17,6 @@ public class Review implements Serializable {
         this.reviewISBN = reviewISBN;
         this.reviewRating = reviewRating;
         this.reviewText = reviewText;
-
     }
 
     public String getReviewTitle() {

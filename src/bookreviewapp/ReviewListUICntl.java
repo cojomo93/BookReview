@@ -3,7 +3,6 @@ package bookreviewapp;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -36,8 +35,6 @@ public class ReviewListUICntl implements Initializable {
     private ObservableList<Review> listOfReviews;
     @FXML
     private TextField textField;
-//    @FXML
-//    private ObservableMap<Integer, Review> mapOfReviews;
 
     public ReviewListUICntl() {
         this.TextColumn = new TableColumn<>("Text");
@@ -53,7 +50,6 @@ public class ReviewListUICntl implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Get the data for the table
         listOfReviews = PersistentDataCntl.getPersistentDataCntl().getPeristentDataCollection().getReviewList().getReviewData();
-        //mapOfReviews = PersistentDataCntl.getPersistentDataCntl().getPeristentDataCollection().getReviewList().getReviewData();
 
         // Set up the table columns and link them to the table data fields
         TitleColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewTitle"));
@@ -62,21 +58,17 @@ public class ReviewListUICntl implements Initializable {
         RatingColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewRating"));
         TextColumn.setCellValueFactory(new PropertyValueFactory<Review, String>("reviewText"));
 
-
         reviewTable.setItems(listOfReviews);
-       //reviewTable.setItems((ObservableList<Review>) mapOfReviews);
-       
 
         FilteredList<Review> flReview = new FilteredList(listOfReviews, p -> true);//Pass the data to a filtered list
-      // FilteredList<Review> flReview = new FilteredList(mapOfReviews, p -> true);
-       
+
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             flReview.setPredicate(review -> {
                 // If filter text is empty, display all persons.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
+                
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
@@ -96,7 +88,6 @@ public class ReviewListUICntl implements Initializable {
             sortedData.comparatorProperty().bind(reviewTable.comparatorProperty());
             reviewTable.setItems(sortedData);
 
-           
         });
 
     }

@@ -14,7 +14,6 @@ public class PersistentDataCollection implements Serializable {
         if (theReviewList == null) {
             theReviewList = new ReviewList();
         }
-
     }
 
     public UserList getuserList() {

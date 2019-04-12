@@ -19,7 +19,6 @@
                 <TableColumn fx:id="ISBNColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="ISBN" />
                 <TableColumn fx:id="RatingColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Rating" />
                 <TableColumn fx:id="TextColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Text" />
-
                   </columns>
         </TableView>
         <HBox id="HBox" alignment="CENTER" spacing="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -41,7 +40,6 @@
                 <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#handleReviewCancelButtonAction" prefHeight="4.0" prefWidth="73.0" text="Cancel" />
                 <Text fx:id="actiontarget" layoutX="241.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             </children>
-        </HBox> 
-      
+        </HBox>       
     </children>
 </AnchorPane>

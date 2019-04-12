@@ -16,12 +16,9 @@
     <padding>
         <Insets bottom="10" left="25" right="25" top="25" />
     </padding>
-    <children>
-    
-        <Button fx:id="setReminder" onAction="#handleSetReminderButtonAction" text="See Book Reviews" GridPane.rowIndex="1" /> 
-       
-        <Button onAction="#handleExitButtonAction" prefHeight="25.0" prefWidth="76.0" text="Exit" GridPane.rowIndex="4" />
-   
+    <children>   
+        <Button fx:id="setReminder" onAction="#handleSetReminderButtonAction" text="See Book Reviews" GridPane.rowIndex="1" />      
+        <Button onAction="#handleExitButtonAction" prefHeight="25.0" prefWidth="76.0" text="Exit" GridPane.rowIndex="4" />  
         <Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <VBox prefHeight="200.0" prefWidth="100.0">
             <children>
@@ -47,7 +44,4 @@
         <RowConstraints />
         <RowConstraints />
     </rowConstraints>
-    
-
-
 </GridPane>
