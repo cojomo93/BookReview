@@ -46,9 +46,7 @@
                 <TextField fx:id="reviewISBN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextArea fx:id="reviewText" prefHeight="87.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Label text="Rating:" GridPane.rowIndex="3" />
-                <ChoiceBox fx:id="reviewRating" layoutX="164.0" layoutY="219.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            
+                <ChoiceBox fx:id="reviewRating" layoutX="164.0" layoutY="219.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />        
             </children>
         </GridPane>
         <Button fx:id="addReviewCancelButton" layoutX="163.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" />
